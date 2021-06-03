@@ -24,6 +24,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  Future<List> _future;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final topHeadlines = Provider.of<TopHeadlines>(context,listen: false);
+    _future = topHeadlines.getHeadlines();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -65,7 +74,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget homePage() {
-    final topHeadlines = Provider.of<TopHeadlines>(context);
+    final topHeadlines = Provider.of<TopHeadlines>(context,listen: false);
     return Column(children: <Widget>[
       Divider(
         color: Colors.grey,
@@ -73,7 +82,7 @@ class _HomePageState extends State<HomePage> {
       // Paste here if things go wrong
       Expanded(
         child: FutureBuilder(
-            future: topHeadlines.getHeadlines(),
+            future: _future,
             builder: (context, AsyncSnapshot<List> snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(

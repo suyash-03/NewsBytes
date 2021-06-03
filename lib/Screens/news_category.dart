@@ -18,9 +18,19 @@ class NewsCategory extends StatefulWidget {
 }
 
 class _NewsCategoryState extends State<NewsCategory> {
+
+
+  Future<List> _future;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final categoryList = Provider.of<CategoryList>(context,listen: false);
+    _future = categoryList.getCategoryList();
+  }
   @override
   Widget build(BuildContext context) {
-    final categoryList = Provider.of<CategoryList>(context);
+    final categoryList = Provider.of<CategoryList>(context,listen: false);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -32,7 +42,7 @@ class _NewsCategoryState extends State<NewsCategory> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(15, 20, 0, 10),
                   child: Text(
-                    "${widget.category}",
+                    "${widget.category}:",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 60,
@@ -45,7 +55,7 @@ class _NewsCategoryState extends State<NewsCategory> {
           ),
           Expanded(
             child: FutureBuilder(
-                future: categoryList.getCategoryList(),
+                future: _future,
                 builder: (context, AsyncSnapshot<List> snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
