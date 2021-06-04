@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_bytes/Screens/home_screen.dart';
+import 'package:news_bytes/api_requests/search_headlines.dart';
 import 'package:news_bytes/api_requests/top_headlines.dart';
 import 'package:provider/provider.dart';
-
 import 'api_requests/category_list.dart';
 
 void main() {
@@ -17,21 +17,20 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return MultiProvider(
       providers: [
-        ListenableProvider(
-        create: (context)=> TopHeadlines(),
+        Provider(
+          create: (context) => TopHeadlines(),
         ),
-        ListenableProvider(
-          create: (context)=> CategoryList(),
+        Provider(
+          create: (context) => CategoryList(),
+        ),
+        Provider(
+          create: (context) => SearchList(),
         )
-
-
       ],
       child: MaterialApp(
-
         debugShowCheckedModeBanner: false,
         home: HomePage(),
       ),
     );
   }
 }
-

@@ -1,19 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:news_bytes/Screens/news_category.dart';
+import 'package:news_bytes/Screens/sources_category.dart';
+import 'package:news_bytes/singeltons/selectedcategory.dart';
 import 'package:page_transition/page_transition.dart';
+
 
 import '../navigation_drawer.dart';
 import 'home_screen.dart';
+
+
 
 class Categories extends StatefulWidget {
   const Categories({Key key}) : super(key: key);
 
   @override
   _CategoriesState createState() => _CategoriesState();
+
 }
 
 class _CategoriesState extends State<Categories> {
+
+
 
 
   @override
@@ -46,6 +53,8 @@ class _CategoriesState extends State<Categories> {
                   ),
                 ),
                 onTap: () {
+                  appData.text = "business";
+                  print(appData.text);
                   Navigator.push(
                       context,
                       PageTransition(
@@ -75,6 +84,9 @@ class _CategoriesState extends State<Categories> {
                   ),
                 ),
                 onTap: () {
+
+                    appData.text = "entertainment";
+                    print(appData.text);
                   Navigator.push(
                       context,
                       PageTransition(
@@ -104,6 +116,8 @@ class _CategoriesState extends State<Categories> {
                   ),
                 ),
                 onTap: () {
+                  appData.text = "general";
+                  print(appData.text);
                   Navigator.push(
                       context,
                       PageTransition(
@@ -133,6 +147,8 @@ class _CategoriesState extends State<Categories> {
                   ),
                 ),
                 onTap: () {
+                  appData.text = "health";
+                  print(appData.text);
                   Navigator.push(
                       context,
                       PageTransition(
@@ -162,6 +178,8 @@ class _CategoriesState extends State<Categories> {
                   ),
                 ),
                 onTap: () {
+                  appData.text = "science";
+                  print(appData.text);
                   Navigator.push(
                       context,
                       PageTransition(
@@ -191,6 +209,8 @@ class _CategoriesState extends State<Categories> {
                   ),
                 ),
                 onTap: () {
+                  appData.text = "sports";
+                  print(appData.text);
                   Navigator.push(
                       context,
                       PageTransition(

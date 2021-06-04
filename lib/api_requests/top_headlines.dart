@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:news_bytes/models/news_model.dart';
 import 'package:provider/provider.dart';
 
-class TopHeadlines extends ChangeNotifier{
+class TopHeadlines {
 
   List<dynamic> newsDynamic=[];
   List<NewsModel> newsHeadlinesFinal = [];
@@ -20,7 +20,7 @@ class TopHeadlines extends ChangeNotifier{
     var response = await http.get(Uri.parse("https://newsapi.org/v2/top-headlines?country=in&apiKey=f6566def783f42ccbdfb3891b6f5dd5d"));
     Map body = await jsonDecode(response.body);
     status = body["status"];
-    notifyListeners();
+
 
     newsDynamic = body["articles"];
     print(newsDynamic.length);

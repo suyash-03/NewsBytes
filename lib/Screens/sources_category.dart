@@ -19,18 +19,25 @@ class NewsCategory extends StatefulWidget {
 
 class _NewsCategoryState extends State<NewsCategory> {
 
-
   Future<List> _future;
+
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
-    final categoryList = Provider.of<CategoryList>(context,listen: false);
+    final categoryList = Provider.of<CategoryList>(context, listen: false);
     _future = categoryList.getCategoryList();
+    super.initState();
   }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    final categoryList = Provider.of<CategoryList>(context, listen: false);
+    categoryList.categoryListFinal.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final categoryList = Provider.of<CategoryList>(context,listen: false);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -45,19 +52,20 @@ class _NewsCategoryState extends State<NewsCategory> {
                     "${widget.category}:",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 60,
+                        fontSize: 50,
                         fontFamily: 'Playfair'),
                   ),
                 ),
               )),
           Divider(
-            color: Colors.grey,thickness: 5,
+            color: Colors.grey,
+            thickness: 5,
           ),
           Expanded(
             child: FutureBuilder(
                 future: _future,
                 builder: (context, AsyncSnapshot<List> snapshot) {
-                  if (snapshot.hasData) {
+                  if (snapshot.connectionState == ConnectionState.done) {
                     return ListView.builder(
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
@@ -82,17 +90,22 @@ class _NewsCategoryState extends State<NewsCategory> {
                                               fontFamily: 'Montserrat'),
                                         )),
                                     Padding(
-                                        padding: const EdgeInsets.fromLTRB(10,0,10,2),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 0, 10, 2),
                                         child: Text(
-                                          "language:"+_categoryListFinal.language,
+                                          "language:" +
+                                              _categoryListFinal.language,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 15,
                                               fontFamily: 'Montserrat'),
                                         )),
                                     Padding(
-                                      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                                        child: Divider(color: Colors.grey,))
+                                        padding:
+                                            EdgeInsets.fromLTRB(30, 0, 30, 0),
+                                        child: Divider(
+                                          color: Colors.grey,
+                                        ))
                                   ],
                                 ),
                               ),
@@ -100,7 +113,7 @@ class _NewsCategoryState extends State<NewsCategory> {
                           ),
                           onTap: () async {
                             print("hello world");
-                            String url = _categoryListFinal.url;
+                            String url =_categoryListFinal.url;
                             if (await canLaunch(url)) {
                               await launch(url,
                                   forceSafariVC: true,
@@ -113,7 +126,7 @@ class _NewsCategoryState extends State<NewsCategory> {
                         );
                       },
                     );
-                  } else if (categoryList.status == "error") {
+                  } else if (snapshot.connectionState == ConnectionState.none){
                     return Center(
                       child: Text(
                         "Can't Fetch API data\n"

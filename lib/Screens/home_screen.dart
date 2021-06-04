@@ -1,13 +1,10 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:news_bytes/Screens/categories.dart';
+import 'package:news_bytes/Screens/categories_types.dart';
 import 'package:news_bytes/Screens/search.dart';
 import 'package:news_bytes/models/news_model.dart';
 import 'package:news_bytes/api_requests/top_headlines.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '../loading.dart';
 import '../navigation_drawer.dart';
@@ -20,17 +17,22 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-
-
 class _HomePageState extends State<HomePage> {
-
   Future<List> _future;
+
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
-    final topHeadlines = Provider.of<TopHeadlines>(context,listen: false);
+    final topHeadlines = Provider.of<TopHeadlines>(context, listen: false);
     _future = topHeadlines.getHeadlines();
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    final topHeadlines = Provider.of<TopHeadlines>(context, listen: false);
+    topHeadlines.newsHeadlinesFinal.clear();
   }
 
   @override
@@ -74,17 +76,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget homePage() {
-    final topHeadlines = Provider.of<TopHeadlines>(context,listen: false);
+
     return Column(children: <Widget>[
       Divider(
         color: Colors.grey,
-      ),
-      // Paste here if things go wrong
-      Expanded(
+      ),      Expanded(
         child: FutureBuilder(
             future: _future,
             builder: (context, AsyncSnapshot<List> snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.connectionState == ConnectionState.done) {
                 return ListView.builder(
                   shrinkWrap: true,
                   itemCount: snapshot.data.length,
@@ -103,10 +103,7 @@ class _HomePageState extends State<HomePage> {
                               children: <Widget>[
                                 Expanded(
                                   child: Container(
-                                    child: Image.network(
-                                      _newsHeadlines.urlImage != null
-                                          ? _newsHeadlines.urlImage
-                                          : 'https://picsum.photos/300',
+                                    child: Image.network(_newsHeadlines.urlImage,
                                       fit: BoxFit.cover,
                                     ),
                                     width: MediaQuery.of(context).size.width,
@@ -157,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                 );
-              } else if (topHeadlines.status == "error") {
+              } else if (snapshot.connectionState == ConnectionState.none) {
                 return Center(
                   child: Text(
                     "Can't Fetch API data\n"
