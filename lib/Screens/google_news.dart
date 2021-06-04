@@ -1,39 +1,37 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:news_bytes/api_requests/category_list.dart';
-import 'package:news_bytes/models/category_model.dart';
+import 'package:news_bytes/api_requests/google_headlines.dart';
+import 'package:news_bytes/api_requests/search_headlines.dart';
+import 'package:news_bytes/models/google_model.dart';
+import 'package:news_bytes/models/search_model.dart';
+import 'package:news_bytes/singeltons/searchkeyword.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../loading.dart';
-import 'home_screen.dart';
 
-class NewsCategory extends StatefulWidget {
-  final String category;
-
-  NewsCategory(this.category);
+class GoogleResults extends StatefulWidget {
+  const GoogleResults({Key key}) : super(key: key);
 
   @override
-  _NewsCategoryState createState() => _NewsCategoryState();
+  _GoogleResultsState createState() => _GoogleResultsState();
 }
 
-class _NewsCategoryState extends State<NewsCategory> {
-
+class _GoogleResultsState extends State<GoogleResults> {
   Future<List> _future;
 
   @override
   void initState() {
-    final categoryList = Provider.of<CategoryList>(context, listen: false);
-    _future = categoryList.getCategoryList();
+    final searchList = Provider.of<GoogleList>(context, listen: false);
+    _future = searchList.getGoogleList();
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    final categoryList = Provider.of<CategoryList>(context, listen: false);
-    categoryList.categoryListFinal.clear();
+    final searchList = Provider.of<GoogleList>(context, listen: false);
+    searchList.googleListFinal.clear();
   }
 
   @override
@@ -42,21 +40,19 @@ class _NewsCategoryState extends State<NewsCategory> {
       backgroundColor: Colors.black,
       body: Column(
         children: [
-          Hero(
-              tag: '${widget.category}',
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 20, 0, 10),
-                  child: Text(
-                    "${widget.category}:",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 50,
-                        fontFamily: 'Playfair'),
-                  ),
-                ),
-              )),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+              child: Text(
+                "Google News",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 50,
+                    fontFamily: 'Playfair'),
+              ),
+            ),
+          ),
           Divider(
             color: Colors.grey,
             thickness: 5,
@@ -70,7 +66,7 @@ class _NewsCategoryState extends State<NewsCategory> {
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
-                        CategoryModel _categoryHeadlines = snapshot.data[index];
+                        GoogleModel _googleHeadlines = snapshot.data[index];
                         return InkWell(
                           child: FadeInUp(
                             child: Container(
@@ -85,9 +81,9 @@ class _NewsCategoryState extends State<NewsCategory> {
                                     Expanded(
                                       child: Container(
                                         child: Image.network(
-                                          _categoryHeadlines.urlImage == null
+                                          _googleHeadlines.urlImage == null
                                               ? 'https://picsum.photos/300'
-                                              : _categoryHeadlines.urlImage,
+                                              : _googleHeadlines.urlImage,
                                           fit: BoxFit.cover,
                                         ),
                                         width: MediaQuery.of(context).size.width,
@@ -96,7 +92,7 @@ class _NewsCategoryState extends State<NewsCategory> {
                                     Padding(
                                         padding: const EdgeInsets.all(10.0),
                                         child: Text(
-                                          _categoryHeadlines.title,
+                                          _googleHeadlines.title,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 28,
@@ -107,7 +103,7 @@ class _NewsCategoryState extends State<NewsCategory> {
                                       const EdgeInsets.fromLTRB(20, 20, 0, 10),
                                       child: Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Text(_categoryHeadlines.publishedDate,
+                                        child: Text(_googleHeadlines.date,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontFamily: 'Montserrat'),
@@ -124,7 +120,7 @@ class _NewsCategoryState extends State<NewsCategory> {
                           ),
                           onTap: () async {
                             print("hello world");
-                            String url = _categoryHeadlines.url;
+                            String url = _googleHeadlines.url;
                             if (await canLaunch(url)) {
                               await launch(url,
                                   forceSafariVC: true,

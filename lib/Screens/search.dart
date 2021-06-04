@@ -79,7 +79,7 @@ class _SearchState extends State<Search> {
               SizedBox(height: 20,),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: Colors.grey[700],
                   border: Border.all(
                       width: 3.0
                   ),
@@ -100,7 +100,8 @@ class _SearchState extends State<Search> {
                       }
                     },
                     icon: Icon(Icons.send_rounded),
-                    label: Text("Search")),
+                    label: Text("Search")
+                ),
               )
             ],
           ),

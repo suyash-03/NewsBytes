@@ -8,38 +8,37 @@ import 'package:news_bytes/Screens/categories_types.dart';
 
 class CategoryList{
 
-
-  Categories categories = Categories();
-
   List<dynamic> categoryDynamic=[];
   List<CategoryModel> categoryListFinal = [];
-  String _name;
+  String _title;
   String _url;
-  String _language;
-  String _description;
-  String status;
+  String _urlImage;
+  String _date;
+  String _publishedDate;
+  String _source;
 
 
-  
   Future<List> getCategoryList() async {
-
-    // getting category name from previous screen (categories)
-
-
-    var response = await http.get(Uri.parse('https://newsapi.org/v2/sources?category='+appData.text+'&apiKey=f6566def783f42ccbdfb3891b6f5dd5d'));
+    var response = await http.get(Uri.parse(''
+        'https://newsapi.org/v2/top-headlines?country=in&category='+appData.text+'&apiKey=05a6e38c9b5943f7b5849e7e8b954fa2'));
     Map body = await jsonDecode(response.body);
-    status = body["status"];
-    categoryDynamic= body["sources"];
+    categoryDynamic= body["articles"];
     print(categoryDynamic.length);
 
     for(int i=0;i< categoryDynamic.length;i++){
-      _name = categoryDynamic[i]["name"].toString();
+
+      _title = categoryDynamic[i]["title"].toString();
       _url = categoryDynamic[i]["url"].toString();
-      _language=categoryDynamic[i]["language"].toString();
-      _description=categoryDynamic[i]["description"];
-      categoryListFinal.add(CategoryModel(_name, _url, _language, _description));
+      _urlImage=categoryDynamic[i]["urlToImage"].toString();
+      _date=categoryDynamic[i]["publishedAt"];
+      _source = categoryDynamic[i]["source"]["name"].toString();
+      _publishedDate = _date.substring(0,10);
+
+      categoryListFinal.add(CategoryModel(_title,_url,_urlImage,_publishedDate,_source));
     }
+
     return categoryListFinal;
+
   }
   
   

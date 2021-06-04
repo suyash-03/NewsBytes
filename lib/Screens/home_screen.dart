@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Tab(
                 icon: Icon(Icons.category),
-                text: 'Sources',
+                text: 'Categories',
               ),
               Tab(
                 icon: Icon(Icons.search_sharp),

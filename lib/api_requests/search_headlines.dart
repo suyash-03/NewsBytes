@@ -15,7 +15,6 @@ class SearchList{
   String _sourceName;
 
 
-
   Future<List> getSearchList() async {
 
     var response = await http.get(Uri.parse('https://newsapi.org/v2/everything?q='+keyData.text+'&apiKey=05a6e38c9b5943f7b5849e7e8b954fa2'));

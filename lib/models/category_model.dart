@@ -1,8 +1,10 @@
 class CategoryModel {
-  String name;
-  String url;
-  String language;
-  String description;
 
-  CategoryModel(this.name, this.url, this.language, this.description);
+  String title;
+  String url;
+  String urlImage;
+  String publishedDate;
+  String source;
+
+  CategoryModel(this.title, this.url, this.urlImage, this.publishedDate,this.source);
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_bytes/Screens/home_screen.dart';
+import 'package:news_bytes/api_requests/google_headlines.dart';
 import 'package:news_bytes/api_requests/search_headlines.dart';
 import 'package:news_bytes/api_requests/top_headlines.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return MultiProvider(
       providers: [
         Provider(
@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
         ),
         Provider(
           create: (context) => SearchList(),
+        ),
+        Provider(
+          create: (context)=> GoogleList(),
         )
       ],
       child: MaterialApp(
