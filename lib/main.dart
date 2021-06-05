@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:news_bytes/Screens/home_screen.dart';
 import 'package:news_bytes/api_requests/google_headlines.dart';
 import 'package:news_bytes/api_requests/search_headlines.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
           create: (context) => SearchList(),
         ),
         Provider(
-          create: (context)=> GoogleList(),
+          create: (context) => GoogleList(),
         )
       ],
       child: MaterialApp(

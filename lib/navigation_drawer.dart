@@ -16,6 +16,13 @@ class NavigationDrawerWidget extends StatelessWidget {
           color: Colors.black,
           child: Column(
             children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 250,
+                child: Image.network(''
+                    'https://wallpapercave.com/wp/wp5590836.jpg',
+                fit: BoxFit.cover,)
+              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ListTile(
@@ -47,6 +54,23 @@ class NavigationDrawerWidget extends StatelessWidget {
                   onTap: () => selectedItem(context, 1),
                 ),
               ),
+              Divider(
+                color: Colors.grey,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ListTile(
+                  leading: FaIcon(
+                    FontAwesomeIcons.flagCheckered,
+                    color: Colors.grey,
+                  ),
+                  title: Text(
+                    'Country',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () => selectedItem(context, 2),
+                ),
+              ),
 
               Expanded(
                 child: Container(
@@ -58,7 +82,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                       // ),
                       Center(
                         child: Text(
-                          "Made with Flutter by Suyash Singh",
+                          "Made with ❤ on Flutter",
                           style:
                           TextStyle(color: Colors.grey, fontFamily: 'Montserrat'),
                         ),
@@ -123,6 +147,13 @@ class NavigationDrawerWidget extends StatelessWidget {
             context,
             PageTransition(
                 type: PageTransitionType.leftToRight, child: GoogleResults()));
+        break;
+      case 2:
+        showDialog(context: context, builder: (BuildContext context){
+          return AlertDialog(
+           title: Text("Coming Soon"),
+          );
+        });
         break;
     }
   }
