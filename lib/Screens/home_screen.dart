@@ -103,41 +103,39 @@ class _HomePageState extends State<HomePage> {
                          // _newsHeadlines.urlImage = 'https://globalimpactnetwork.org/wp-content/themes/globalimpact/images/no-image-found-360x250.png';
                          return InkWell(
                            child: FadeInUp(
-                             child: Expanded(
-                               child: Container(
+                             child: Container(
+                               color: Colors.black,
+                               child: Card(
+                                 elevation: 0.0,
                                  color: Colors.black,
-                                 child: Card(
-                                   elevation: 0.0,
-                                   color: Colors.black,
-                                   child: Column(
-                                     children: <Widget>[
-                                       Padding(
-                                           padding: const EdgeInsets.all(10.0),
-                                           child: Text(
-                                             _newsHeadlines.title,
-                                             style: TextStyle(
-                                                 color: Colors.white,
-                                                 fontSize: 28,
-                                                 fontFamily: 'Playfair'),
-                                           )),
-                                       Padding(
-                                         padding:
-                                         const EdgeInsets.fromLTRB(20, 20, 0, 10),
-                                         child: Align(
-                                           alignment: Alignment.bottomLeft,
-                                           child: Text(
-                                             "${(_newsHeadlines.publishedDate).toString()}",
-                                             style: TextStyle(
-                                                 color: Colors.white,
-                                                 fontFamily: 'Montserrat'),
-                                           ),
+                                 child: Column(
+                                   children: <Widget>[
+                                     Padding(
+                                         padding: const EdgeInsets.all(10.0),
+                                         child: Text(
+                                           _newsHeadlines.title,
+                                           style: TextStyle(
+                                               color: Colors.white,
+                                               fontSize: 28,
+                                               fontFamily: 'Playfair'),
+                                         )),
+                                     Padding(
+                                       padding:
+                                       const EdgeInsets.fromLTRB(20, 20, 0, 10),
+                                       child: Align(
+                                         alignment: Alignment.bottomLeft,
+                                         child: Text(
+                                           "${(_newsHeadlines.publishedDate).toString()}",
+                                           style: TextStyle(
+                                               color: Colors.white,
+                                               fontFamily: 'Montserrat'),
                                          ),
                                        ),
-                                       Divider(
-                                         color: Colors.grey,
-                                       )
-                                     ],
-                                   ),
+                                     ),
+                                     Divider(
+                                       color: Colors.grey,
+                                     )
+                                   ],
                                  ),
                                ),
                              )
