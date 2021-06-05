@@ -9,10 +9,10 @@ class TopHeadlines {
 
   List<dynamic> newsDynamic=[];
   List<NewsModel> newsHeadlinesFinal = [];
-  String _title;
-  String _url;
-  String _urlImage;
-  String _publishedDate;
+  String title;
+  String url;
+  String urlImage;
+  String publishedDate;
   String date;
   String status;
 
@@ -27,14 +27,14 @@ class TopHeadlines {
 
     for(int i =0 ; i< newsDynamic.length;i++){
 
-      _title=newsDynamic[i]["title"].toString();
-      _url=newsDynamic[i]["url"].toString();
-      _urlImage=newsDynamic[i]["urlToImage"].toString();
+      title=newsDynamic[i]["title"].toString();
+      url=newsDynamic[i]["url"].toString();
+      urlImage=newsDynamic[i]["urlToImage"].toString();
       date=newsDynamic[i]["publishedAt"].toString();
-      _publishedDate = date.substring(0,10);
+      publishedDate = date.substring(0,10);
 
 
-      newsHeadlinesFinal.add(NewsModel(_title, _url, _urlImage,_publishedDate));
+      newsHeadlinesFinal.add(NewsModel(title,url,urlImage,publishedDate));
     }
     // print(newsHeadlinesFinal);
     return newsHeadlinesFinal;
