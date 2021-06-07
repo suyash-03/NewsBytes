@@ -3,6 +3,8 @@ import 'package:news_bytes/Screens/home_screen.dart';
 import 'package:news_bytes/api_requests/google_headlines.dart';
 import 'package:news_bytes/api_requests/search_headlines.dart';
 import 'package:news_bytes/api_requests/top_headlines.dart';
+import 'package:news_bytes/connectivity.dart';
+import 'package:news_bytes/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'api_requests/category_list.dart';
 
@@ -10,8 +12,13 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -27,11 +34,12 @@ class MyApp extends StatelessWidget {
         ),
         Provider(
           create: (context) => GoogleList(),
-        )
+        ),
+        ChangeNotifierProvider(create: (context) => ConnectivityStatus())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: Wrapper(),
       ),
     );
   }

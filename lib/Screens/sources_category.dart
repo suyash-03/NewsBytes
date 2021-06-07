@@ -80,7 +80,6 @@ class _NewsCategoryState extends State<NewsCategory> {
                         itemBuilder: (context, index) {
                           CategoryModel _categoryHeadlines = snapshot.data[index];
                           if(_categoryHeadlines.urlImage == "null"){
-                            // _newsHeadlines.urlImage = 'https://globalimpactnetwork.org/wp-content/themes/globalimpact/images/no-image-found-360x250.png';
                             return InkWell(
                               child: FadeInUp(
                                   child: Container(
