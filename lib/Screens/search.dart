@@ -25,7 +25,7 @@ class _SearchState extends State<Search> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FadeInDown(
+              ZoomIn(
                 child: Text('Search the Web\n'
                     'for News Articles',style: TextStyle(
                   color: Colors.white,
@@ -77,16 +77,7 @@ class _SearchState extends State<Search> {
                 ),
               ),),
               SizedBox(height: 20,),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[700],
-                  border: Border.all(
-                      width: 3.0
-                  ),
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(20.0) //                 <--- border radius here
-                  ),
-                ),
+              ZoomIn(
                 child: FlatButton.icon(
                     onPressed: (){
                       if (_formKey.currentState.validate()) {
@@ -99,8 +90,11 @@ class _SearchState extends State<Search> {
                                 child: SearchResults()));
                       }
                     },
-                    icon: Icon(Icons.send_rounded),
-                    label: Text("Search")
+                    icon: Icon(Icons.send_rounded,color: Colors.white,),
+                    label: Text("Search",style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Montserrat'
+                    ),)
                 ),
               )
             ],

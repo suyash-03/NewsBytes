@@ -106,13 +106,13 @@ class _HomePageState extends State<HomePage> {
                         return InkWell(
                           child: FadeInUp(
                               child: Container(
-                            color: Colors.black,
-                            child: Card(
-                              elevation: 0.0,
-                              color: Colors.black,
-                              child: Column(
-                                children: <Widget>[
-                                  Padding(
+                                color: Colors.black,
+                                child: Card(
+                                  elevation: 0.0,
+                                  color: Colors.black,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: Text(
                                         _newsHeadlines.title,

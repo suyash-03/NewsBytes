@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import '../connectivity.dart';
@@ -41,24 +42,26 @@ class _NoInternetState extends State<NoInternet> {
                   fontFamily: 'Montserrat'
               ),),
             SizedBox(height: 40,),
-            FlatButton(
-              onPressed: () async{
-                final connectionProvider = Provider.of<ConnectivityStatus>(context,listen: false);
-                connectionProvider.checkConnectivity();
-                print("Button Press");
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(20))
+            ZoomIn(
+              child: FlatButton(
+                onPressed: () async{
+                  final connectionProvider = Provider.of<ConnectivityStatus>(context,listen: false);
+                  connectionProvider.checkConnectivity();
+                  print("Button Press");
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(20))
+                  ),
+                  height: 50,
+                  width: 150,
+                  child: Center(child: Text("Try Again",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat'
+                    ),),),
                 ),
-                height: 50,
-                width: 150,
-                child: Center(child: Text("Try Again",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat'
-                  ),),),
               ),
             )
           ],

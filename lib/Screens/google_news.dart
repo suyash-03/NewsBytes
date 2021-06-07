@@ -40,6 +40,7 @@ class _GoogleResultsState extends State<GoogleResults> {
       backgroundColor: Colors.black,
       body: Column(
         children: [
+          SizedBox(height: 20,),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -62,76 +63,85 @@ class _GoogleResultsState extends State<GoogleResults> {
                 future: _future,
                 builder: (context, AsyncSnapshot<List> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        GoogleModel _googleHeadlines = snapshot.data[index];
-                        return InkWell(
-                          child: FadeInUp(
-                            child: Container(
-                              color: Colors.black,
-                              height: MediaQuery.of(context).size.height / 1.5,
-                              width: MediaQuery.of(context).size.height / 1.5,
-                              child: Card(
-                                elevation: 0.0,
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        final searchList = Provider.of<GoogleList>(context, listen: false);
+                        searchList.googleListFinal.clear();
+                        Future.delayed(Duration(seconds: 2));
+                        _future = searchList.getGoogleList();
+                        print("Future Reloaded");
+                      },
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          GoogleModel _googleHeadlines = snapshot.data[index];
+                          return InkWell(
+                            child: FadeInUp(
+                              child: Container(
                                 color: Colors.black,
-                                child: Column(
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Container(
-                                        child: Image.network(
-                                          _googleHeadlines.urlImage == null
-                                              ? 'https://picsum.photos/300'
-                                              : _googleHeadlines.urlImage,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        width: MediaQuery.of(context).size.width,
-                                      ),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Text(
-                                          _googleHeadlines.title,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 28,
-                                              fontFamily: 'Playfair'),
-                                        )),
-                                    Padding(
-                                      padding:
-                                      const EdgeInsets.fromLTRB(20, 20, 0, 10),
-                                      child: Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child: Text(_googleHeadlines.date,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'Montserrat'),
+                                height: MediaQuery.of(context).size.height / 2.2,
+                                width: MediaQuery.of(context).size.width,
+                                child: Card(
+                                  elevation: 0.0,
+                                  color: Colors.black,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          child: Image.network(
+                                            _googleHeadlines.urlImage == "null"
+                                                ? 'https://picsum.photos/300'
+                                                : _googleHeadlines.urlImage,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          width: MediaQuery.of(context).size.width,
                                         ),
                                       ),
-                                    ),
-                                    Divider(
-                                      color: Colors.grey,
-                                    )
-                                  ],
+                                      Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Text(
+                                            _googleHeadlines.title,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 22,
+                                                fontFamily: 'Playfair'),
+                                          )),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.fromLTRB(20, 20, 0, 10),
+                                        child: Align(
+                                          alignment: Alignment.bottomLeft,
+                                          child: Text(_googleHeadlines.date,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: 'Montserrat'),
+                                          ),
+                                        ),
+                                      ),
+                                      Divider(
+                                        color: Colors.grey,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          onTap: () async {
-                            print("hello world");
-                            String url = _googleHeadlines.url;
-                            if (await canLaunch(url)) {
-                              await launch(url,
-                                  forceSafariVC: true,
-                                  forceWebView: true,
-                                  enableJavaScript: true);
-                            } else {
-                              throw 'Could not launch $url';
-                            }
-                          },
-                        );
-                      },
+                            onTap: () async {
+                              print("hello world");
+                              String url = _googleHeadlines.url;
+                              if (await canLaunch(url)) {
+                                await launch(url,
+                                    forceSafariVC: true,
+                                    forceWebView: true,
+                                    enableJavaScript: true);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                            },
+                          );
+                        },
+                      ),
                     );
                   } else if (snapshot.connectionState == ConnectionState.none) {
                     return Center(
