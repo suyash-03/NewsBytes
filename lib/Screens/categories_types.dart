@@ -218,6 +218,37 @@ class _CategoriesState extends State<Categories> {
                           child: NewsCategory("sports")));
                 },
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0,8,0,8),
+              child: InkWell(
+                child: Container(
+                  child: Hero(
+                    tag: 'technology',
+                    child: Card(
+                      color: Colors.black,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'technology',
+                          style: TextStyle(color: Colors.white,
+                              fontFamily: 'Playfair',
+                              fontSize: 30),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  appData.text = "technology";
+                  print(appData.text);
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade,
+                          child: NewsCategory("technology")));
+                },
+              ),
             )
           ]),
     );
