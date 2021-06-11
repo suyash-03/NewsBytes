@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_bytes/Screens/home_screen.dart';
 import 'package:news_bytes/Screens/no_internet.dart';
-import 'package:news_bytes/connectivity.dart';
+import 'package:news_bytes/shared/connectivity.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatefulWidget {

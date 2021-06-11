@@ -8,7 +8,7 @@ import 'package:news_bytes/singeltons/searchkeyword.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../loading.dart';
+import '../shared/loading.dart';
 
 class GoogleResults extends StatefulWidget {
   const GoogleResults({Key key}) : super(key: key);

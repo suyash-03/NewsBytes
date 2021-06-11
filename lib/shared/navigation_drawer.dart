@@ -5,8 +5,8 @@ import 'package:news_bytes/api_requests/top_headlines.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'Screens/google_news.dart';
-import 'Screens/categories_types.dart';
+import '../Screens/google_news.dart';
+import '../Screens/categories_types.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   @override

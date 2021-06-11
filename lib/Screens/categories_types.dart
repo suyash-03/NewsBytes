@@ -5,7 +5,7 @@ import 'package:news_bytes/singeltons/selectedcategory.dart';
 import 'package:page_transition/page_transition.dart';
 
 
-import '../navigation_drawer.dart';
+import '../shared/navigation_drawer.dart';
 import 'home_screen.dart';
 
 

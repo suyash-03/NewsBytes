@@ -3,8 +3,8 @@ import 'package:news_bytes/Screens/home_screen.dart';
 import 'package:news_bytes/api_requests/google_headlines.dart';
 import 'package:news_bytes/api_requests/search_headlines.dart';
 import 'package:news_bytes/api_requests/top_headlines.dart';
-import 'package:news_bytes/connectivity.dart';
-import 'package:news_bytes/wrapper.dart';
+import 'package:news_bytes/shared/connectivity.dart';
+import 'package:news_bytes/shared/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'api_requests/category_list.dart';
 

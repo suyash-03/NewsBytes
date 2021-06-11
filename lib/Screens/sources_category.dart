@@ -5,7 +5,7 @@ import 'package:news_bytes/models/category_model.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../loading.dart';
+import '../shared/loading.dart';
 import 'home_screen.dart';
 
 class NewsCategory extends StatefulWidget {

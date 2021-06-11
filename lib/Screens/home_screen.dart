@@ -8,8 +8,8 @@ import 'package:news_bytes/Screens/search.dart';
 import 'package:news_bytes/models/news_model.dart';
 import 'package:news_bytes/api_requests/top_headlines.dart';
 import 'package:provider/provider.dart';
-import '../loading.dart';
-import '../navigation_drawer.dart';
+import '../shared/loading.dart';
+import '../shared/navigation_drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {

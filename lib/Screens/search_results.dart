@@ -6,7 +6,7 @@ import 'package:news_bytes/singeltons/searchkeyword.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../loading.dart';
+import '../shared/loading.dart';
 
 class SearchResults extends StatefulWidget {
   const SearchResults({Key key}) : super(key: key);

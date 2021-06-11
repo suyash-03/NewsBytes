@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import '../connectivity.dart';
+import '../shared/connectivity.dart';
 import 'package:provider/provider.dart';
 
 class NoInternet extends StatefulWidget {
