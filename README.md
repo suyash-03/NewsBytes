@@ -2,6 +2,8 @@
 
 News for the GenZ
 
+![alt text](https://github.com/suyash-03/NewsBytes/blob/master/assets/img1.jpeg?raw=true)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
